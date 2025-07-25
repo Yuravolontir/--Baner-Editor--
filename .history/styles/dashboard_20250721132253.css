@@ -1,0 +1,114 @@
+:root {
+  --font-main: 'Inter', sans-serif;
+  --color-bg: #f4f4f4;
+  --color-dark: #222;
+  --color-accent: #3f51b5;
+  --control-bg: #fff;
+  --border-radius: 0.8rem;
+  --spacing: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+  height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 4vh 2vw;
+}
+
+/* Navigation styling */
+nav {
+  width: 100%;
+  margin-bottom: 2rem;
+  background: var(--control-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-radius: var(--border-radius);
+  padding: 0.8rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+nav ul li a:hover {
+  background: #e3e7fa;
+  color: #2c3e91;
+}
+
+/* Dashboard content */
+h1#welcome {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--color-accent);
+  background: var(--control-bg);
+  padding: 1.2rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  body {
+    padding: 2vh 1vw;
+  }
+  nav ul {
+    gap: 1rem;
+  }
+  h1#welcome {
+    font-size: 1.3rem;
+    padding: 1rem 1vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+button {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 10rem;
+  margin : 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 2rem;
+
+}

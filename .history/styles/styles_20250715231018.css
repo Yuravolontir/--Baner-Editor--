@@ -1,0 +1,106 @@
+:root {
+  --font-main: 'Inter', sans-serif;
+  --color-bg: #f4f4f4;
+  --color-dark: #222;
+  --color-accent: #3f51b5;
+  --control-bg: #fff;
+  --border-radius: 0.8rem;
+  --spacing: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* Center everything vertically and horizontally */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4vh 2vw;
+}
+
+/* Layout for the two forms */
+#forms-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Each form box */
+#form-container,
+#form-login-container {
+  background-color: var(--control-bg);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+/* Headings */
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Labels and Inputs */
+form label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+/* Button */
+button[type="submit"] {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #2c3e91;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  #forms-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  body {
+    padding: 2rem 1rem;
+  }
+}

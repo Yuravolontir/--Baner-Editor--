@@ -1,0 +1,41 @@
+body {
+    background-color: grey;
+}
+
+#form-container{
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+nav {
+  margin-top: auto;
+  margin-bottom: auto; 
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  margin-left: auto; /* Push navigation items to the right end */
+}
+
+
+nav ul li {
+  padding-right: 2vw;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: lightgreen;
+  font-size: 3.3vw;
+}
+
+nav ul li a:hover {
+  color: orange;
+}

@@ -1,0 +1,29 @@
+import { User } from './classes.js'; 
+import { UsersList } from './global.js'; 
+
+
+
+export function storeUsersData(event) 
+{
+    event.preventDefault(); // Prevent form submission
+    let form = event.target;
+    let firstName = form .querySelector("#fname").value;
+    let email = form.querySelector("#email").value;
+    let username = form.querySelector("#username").value;
+    let password = form.querySelector("#password").value;
+    
+    let user = new User(firstName, email, username, password);
+    UsersList.push(user); // Add user to the UsersList array
+    UsersList.setItem('UsersList', JSON.stringify(UsersList));
+    saveToLocalStorage();
+}
+ function saveToLocalStorage() {
+    localStorage.setItem('UsersList', JSON.stringify(UsersList)); // שמירה בלוקאל סטורג׳
+    alert('User registered successfully!'); // הודעה למשתמש
+}
+
+export function checkUsersData(event) {
+    event.preventDefault();
+    let form = event.target;
+    let username = form.querySelector("#login-username").value;
+    let password = form.querySelector("#login-password").value;

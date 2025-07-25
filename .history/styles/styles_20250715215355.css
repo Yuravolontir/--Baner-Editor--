@@ -1,0 +1,210 @@
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #f3f3f3;
+    font-family: 'Inter', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation styling */
+nav {
+    margin: 0 auto 32px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2vw;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    padding: 0;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #4caf50;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+nav ul li a:hover {
+    color: #ff9800;
+}
+
+/* Main grid container for banner builder */
+#banner-builder-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 16px;
+    align-items: flex-start;
+}
+
+/* Controls section */
+#controls-section {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+label {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 4px;
+}
+button, input[type="color"], input[type="number"], select {
+    margin: 6px 0 12px 0;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+button {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(76,175,80,0.08);
+}
+button:hover {
+    background: #388e3c;
+}
+input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+textarea {
+    width: 100%;
+    min-height: 40px;
+    max-width: 500px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 12px;
+    background: #fafafa;
+}
+
+/* Preview section */
+#preview {
+    min-height: 260px;
+    background: #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Banner inside preview */
+#generatedBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 16px;
+    transition: box-shadow 0.2s;
+}
+#generatedBanner h1 {
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+#generatedBanner pre, #generatedBanner p {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: #333;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Download button styling */
+#downloadBanner {
+    margin: 18px auto 0 auto;
+    display: block;
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+    transition: background 0.2s;
+}
+#downloadBanner:hover {
+    background: #1565c0;
+}
+
+/* Form container styling (for index.html) */
+#form-container {
+    width: 350px;
+    margin: 40px auto;
+    padding: 24px 20px;
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    #banner-builder-container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 0 4vw;
+    }
+    #controls-section, #preview {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+    }
+}
+@media (max-width: 700px) {
+    #form-container, #preview {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 10px;
+    }
+    #generatedBanner {
+        padding: 8px;
+    }
+    nav ul li a {
+        font-size: 1rem;
+    }
+}

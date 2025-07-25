@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/banner.css">
+    <script type="module" src="/scripts/banner.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+
+<!-- Include html2canvas library for capturing the banner as an image-->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+
+
+
+
+    
+</head>
+<body>
+   
+<nav>
+    <ul>
+    <li><a href="/dashboard.html">Home</a></li>
+    <li><a href="/banner.html">Create Banner</a></li>
+    <li><a href="/thanks-to-developer.html">Developer</a></li>
+    <li><a href="/thanks-to-developer.html">Developer</a></li>
+    </ul>
+</nav>
+<div id="banner-builder-container">
+<div id="controls-section">
+<h3>Banner size</h3>
+<button id="250X250">250x250</button>
+<button id="300X600">300x600</button>
+<h3>Text</h3>
+<textarea id="bannerHeading" placeholder="Enter your heading text here..."></textarea>
+<textarea id="bannerText" placeholder="Enter your main text here..."></textarea>
+<h3>Background Color</h3>
+<input type="color" id="BackgroundColor">
+
+<h3>Heading Color</h3>
+<input type="color" id="HeadingColor">
+
+<h3>Text Color</h3>
+<input type="color" id="TextColor">
+
+<h3>Choose heading font</h3>
+<select id="head-font">
+  <option value="Courier New">Courier New</option>
+  <option value="Inter">Inter</option>
+  <option value="Poppins">Poppins</option>
+  <option value="Space Grotesk">Space Grotesk</option>
+  <option value="Outfit">Outfit</option>
+  <option value="Manrope">Manrope</option>
+  <option value="Sora">Sora</option>
+  <option value="Figtree">Figtree</option>
+  <option value="Rubik">Rubik</option>
+  <option value="Urbanist">Urbanist</option>
+  <option value="DM Sans">DM Sans</option>
+  <option value="Silkscreen, sans-serif">Silkscreen Static</option>
+  <option value="Orbitron, sans-serif">Orbitron</option>
+
+</select>
+
+<h3>Choose text font</h3>
+<select id="text-font">
+  <option value="Courier New">Courier New</option>
+  <option value="Inter">Inter</option>
+  <option value="Poppins">Poppins</option>
+  <option value="Space Grotesk">Space Grotesk</option>
+  <option value="Outfit">Outfit</option>
+  <option value="Manrope">Manrope</option>
+  <option value="Sora">Sora</option>
+  <option value="Figtree">Figtree</option>
+  <option value="Rubik">Rubik</option>
+  <option value="Urbanist">Urbanist</option>
+  <option value="DM Sans">DM Sans</option>
+  <option value="Silkscreen, sans-serif">Silkscreen Static</option>
+  <option value="Orbitron, sans-serif">Orbitron</option>
+
+</select>
+
+<h3>Banner Heading Font-size</h3>
+<input type="number" id="headingFontSize" placeholder="Enter font size in px" value="24">
+<h3>Banner Text Font-size</h3>
+<input type="number" id="textFontSize" placeholder="Enter font size in px" value="16">
+
+<h3>Or try our design</h3>
+<select id="designStyle">
+  <option value="default">Empty</option>
+  <option value="gradient1">Minimal Clean</option>
+  <option value="gradient2">Bold & Colorful</option>
+  <option value="gradient3">Retro Pixel</option>
+</select>
+
+
+</div>
+<div id="preview">
+    
+</div>
+<button id="downloadBanner">Download Banner</button>
+<button id="saveBanner">Save Banner</button>
+
+</div>
+</body>
+</html>
