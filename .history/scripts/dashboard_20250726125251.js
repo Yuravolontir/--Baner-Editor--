@@ -528,171 +528,72 @@ function UsersLandingPagesList() {
             
             // Add event listener for the download button
 downloadbutton.addEventListener("click", () => {
+  // Clone the page to avoid modifying the original preview
   const clonedPage = page.cloneNode(true);
 
   // Remove preview lead form if exists
   const previewLeadForm = clonedPage.querySelector("#leadFormContainer");
   if (previewLeadForm) previewLeadForm.remove();
 
-  // Add Netlify-ready form if leadform is enabled
-  if (b.leadform === "yes") {
-    const netlifyForm = document.createElement("form");
-    netlifyForm.name = "lead-form";
-    netlifyForm.method = "POST";
-    netlifyForm.setAttribute("action", "/thank-you");
-    netlifyForm.setAttribute("data-netlify", "true");
-    netlifyForm.setAttribute("netlify", "");
-    netlifyForm.id = "leadFormContainer";
+  // Netlify form HTML (only if user chose to include lead form)
+  const leadFormHTML = b.leadform === "yes" ? `
+    <form name="lead-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex; flex-direction:column; align-items:center; margin-top: 2rem;">
+      <input type="hidden" name="form-name" value="lead-form" />
+      <p style="display:none;">
+        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+      <input type="text" name="name" placeholder="Your Name" required style="margin: 8px 0; padding: 8px; border-radius:5px; width: 250px;" />
+      <input type="email" name="email" placeholder="Your Email" required style="margin: 8px 0; padding: 8px; border-radius:5px; width: 250px;" />
+      <button type="submit" style="margin-top: 12px; padding: 12px 24px; background-color: ${b.ctacolor === '#000000' ? '#3f51b5' : b.ctacolor}; color: white; border:none; border-radius: 6px; cursor:pointer;">
+        Submit
+      </button>
+    </form>
+  ` : '';
 
-    // Style form container
-    Object.assign(netlifyForm.style, {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "5vh",
-      width: "100%"
-    });
-
-    // Hidden input to identify form
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "form-name";
-    hidden.value = "lead-form";
-    netlifyForm.appendChild(hidden);
-
-    // Name field
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.name = "name";
-    nameInput.placeholder = "Your Name";
-    nameInput.required = true;
-    Object.assign(nameInput.style, {
-      margin: "10px",
-      borderRadius: "5px",
-      padding: "8px",
-      fontSize: "1rem",
-      width: "90%",
-      maxWidth: "400px",
-      boxSizing: "border-box"
-    });
-    netlifyForm.appendChild(nameInput);
-
-    // Email field
-    const emailInput = document.createElement("input");
-    emailInput.type = "email";
-    emailInput.name = "email";
-    emailInput.placeholder = "Your Email";
-    emailInput.required = true;
-    Object.assign(emailInput.style, {
-      margin: "10px",
-      borderRadius: "5px",
-      padding: "8px",
-      fontSize: "1rem",
-      width: "90%",
-      maxWidth: "400px",
-      boxSizing: "border-box"
-    });
-    netlifyForm.appendChild(emailInput);
-
-    // Submit button
-    const submitBtn = document.createElement("button");
-    submitBtn.type = "submit";
-    submitBtn.textContent = "Submit";
-    Object.assign(submitBtn.style, {
-      backgroundColor: b.ctacolor === "#000000" ? "#3f51b5" : b.ctacolor,
-      color: "white",
-      border: "none",
-      padding: "0.6rem 1rem",
-      fontSize: "1rem",
-      borderRadius: "0.8rem",
-      cursor: "pointer",
-      margin: "2vh auto",
-      width: "90%",
-      maxWidth: "200px",
-      display: "block"
-    });
-    netlifyForm.appendChild(submitBtn);
-
-    clonedPage.appendChild(netlifyForm);
-  }
-
-  // Generate full HTML
+  // Final HTML content
   const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Landing Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    html, body {
-      width: 100vw; height: 100vh; overflow-x: hidden; font-family: 'Inter', sans-serif;
-    }
-    body, .landing-page {
-      width: 100vw !important; max-width: 100vw !important;
-      margin: 0 !important; padding: 0 !important; box-sizing: border-box;
-    }
-    .landing-page {
-      display: flex; flex-direction: column; min-height: 100vh;
-      background-image: ${page.style.backgroundImage || 'none'};
-      background-size: ${page.style.backgroundSize || 'cover'};
-      background-repeat: ${page.style.backgroundRepeat || 'no-repeat'};
-      background-position: ${page.style.backgroundPosition || 'center'};
-      background-color: ${page.style.backgroundColor || '#fff'};
-      align-items: ${page.style.alignItems || 'center'};
-      justify-content: ${page.style.justifyContent || 'center'};
-      padding: 20px;
-    }
-    form#leadFormContainer {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 5vh;
-    }
+    /* Include your CSS styles here (same as before) */
+    /* ... (same full CSS from your working version) ... */
   </style>
 </head>
 <body>
-  <!-- Hidden fallback Netlify form -->
-  <form name="lead-form" method="POST" data-netlify="true" netlify hidden>
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-  </form>
-
   ${clonedPage.outerHTML}
-
+  ${leadFormHTML}
   <script>
     const cta = document.getElementById("cta");
-    if (cta) {
-      cta.addEventListener("click", () => {
-        const type = cta.className;
-        const link = cta.getAttribute("data-link");
-        if (type === "default") window.location.href = link;
-        else if (type === "Behavior1") window.location.href = "tel:" + link;
-        else if (type === "Behavior2") window.location.href = "https://wa.me/" + link;
-      });
-    }
+    const clas = cta.className;
+
+    cta.addEventListener("click", () => {
+      if (cta.className === "default") {
+        window.location.href = cta.getAttribute("data-link");
+      } else if (cta.className === "Behavior1") {
+        window.location.href = "tel:" + cta.getAttribute("data-link");
+      } else if (cta.className === "Behavior2") {
+        window.location.href = "https://wa.me/" + cta.getAttribute("data-link");
+      }
+    });
   </script>
 </body>
 </html>
   `.trim();
 
-  // Download file
+  // Create Blob and trigger download
   const blob = new Blob([htmlContent], { type: "text/html" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "landing-page.html";
   link.click();
 });
-
-
-
 
             // ----------------------------
             deletebutton.addEventListener("click", () => {

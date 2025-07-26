@@ -527,41 +527,32 @@ function UsersLandingPagesList() {
             deletebutton.style.margin="2vh";
             
             // Add event listener for the download button
-downloadbutton.addEventListener("click", () => {
+downloadButton.addEventListener("click", () => {
   const clonedPage = page.cloneNode(true);
 
-  // Remove preview lead form if exists
+  // Remove preview lead form
   const previewLeadForm = clonedPage.querySelector("#leadFormContainer");
   if (previewLeadForm) previewLeadForm.remove();
 
-  // Add Netlify-ready form if leadform is enabled
+  // Add Netlify form to the cloned page
   if (b.leadform === "yes") {
     const netlifyForm = document.createElement("form");
     netlifyForm.name = "lead-form";
     netlifyForm.method = "POST";
-    netlifyForm.setAttribute("action", "/thank-you");
     netlifyForm.setAttribute("data-netlify", "true");
-    netlifyForm.setAttribute("netlify", "");
     netlifyForm.id = "leadFormContainer";
+    netlifyForm.style.display = "flex";
+    netlifyForm.style.flexDirection = "column";
+    netlifyForm.style.alignItems = "center";
+    netlifyForm.style.justifyContent = "center";
+    netlifyForm.style.paddingTop = "5vh";
+    netlifyForm.style.width = "100%";
 
-    // Style form container
-    Object.assign(netlifyForm.style, {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "5vh",
-      width: "100%"
-    });
+    const hiddenField = document.createElement("input");
+    hiddenField.type = "hidden";
+    hiddenField.name = "form-name";
+    hiddenField.value = "lead-form";
 
-    // Hidden input to identify form
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "form-name";
-    hidden.value = "lead-form";
-    netlifyForm.appendChild(hidden);
-
-    // Name field
     const nameInput = document.createElement("input");
     nameInput.type = "text";
     nameInput.name = "name";
@@ -574,11 +565,9 @@ downloadbutton.addEventListener("click", () => {
       fontSize: "1rem",
       width: "90%",
       maxWidth: "400px",
-      boxSizing: "border-box"
+      boxSizing: "border-box",
     });
-    netlifyForm.appendChild(nameInput);
 
-    // Email field
     const emailInput = document.createElement("input");
     emailInput.type = "email";
     emailInput.name = "email";
@@ -591,11 +580,9 @@ downloadbutton.addEventListener("click", () => {
       fontSize: "1rem",
       width: "90%",
       maxWidth: "400px",
-      boxSizing: "border-box"
+      boxSizing: "border-box",
     });
-    netlifyForm.appendChild(emailInput);
 
-    // Submit button
     const submitBtn = document.createElement("button");
     submitBtn.type = "submit";
     submitBtn.textContent = "Submit";
@@ -610,57 +597,62 @@ downloadbutton.addEventListener("click", () => {
       margin: "2vh auto",
       width: "90%",
       maxWidth: "200px",
-      display: "block"
+      display: "block",
     });
+
+    netlifyForm.appendChild(hiddenField);
+    netlifyForm.appendChild(nameInput);
+    netlifyForm.appendChild(emailInput);
     netlifyForm.appendChild(submitBtn);
 
     clonedPage.appendChild(netlifyForm);
   }
 
-  // Generate full HTML
+  // HTML file content
   const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Landing Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     html, body {
-      width: 100vw; height: 100vh; overflow-x: hidden; font-family: 'Inter', sans-serif;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
     }
     body, .landing-page {
-      width: 100vw !important; max-width: 100vw !important;
-      margin: 0 !important; padding: 0 !important; box-sizing: border-box;
+      width: 100% !important;
+      max-width: 100vw !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box;
     }
     .landing-page {
-      display: flex; flex-direction: column; min-height: 100vh;
-      background-image: ${page.style.backgroundImage || 'none'};
-      background-size: ${page.style.backgroundSize || 'cover'};
-      background-repeat: ${page.style.backgroundRepeat || 'no-repeat'};
-      background-position: ${page.style.backgroundPosition || 'center'};
-      background-color: ${page.style.backgroundColor || '#fff'};
-      align-items: ${page.style.alignItems || 'center'};
-      justify-content: ${page.style.justifyContent || 'center'};
-      padding: 20px;
-    }
-    form#leadFormContainer {
-      width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 5vh;
+      min-height: 100vh;
+      background-image: ${page.style.backgroundImage ? page.style.backgroundImage : 'none'};
+      background-size: ${page.style.backgroundSize ? page.style.backgroundSize : 'cover'};
+      background-repeat: ${page.style.backgroundRepeat ? page.style.backgroundRepeat : 'no-repeat'};
+      background-position: ${page.style.backgroundPosition ? page.style.backgroundPosition : 'center'};
+      background-color: ${page.style.backgroundColor};
+      align-items: ${page.style.alignItems};
+      justify-content: ${page.style.justifyContent};
     }
   </style>
 </head>
 <body>
-  <!-- Hidden fallback Netlify form -->
-  <form name="lead-form" method="POST" data-netlify="true" netlify hidden>
+  <!-- Hidden form for Netlify backend processing -->
+  <form name="lead-form" netlify hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
   </form>
@@ -678,19 +670,37 @@ downloadbutton.addEventListener("click", () => {
         else if (type === "Behavior2") window.location.href = "https://wa.me/" + link;
       });
     }
+
+    // Prevent redirect after Netlify form submission
+    const leadForm = document.forms["lead-form"];
+    if (leadForm) {
+      leadForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(leadForm);
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => {
+          leadForm.innerHTML = '<h2 style="text-align:center; color:green; padding:2rem;">Thanks for your submission!</h2>';
+        })
+        .catch((error) => {
+          alert("Form submission error: " + error);
+        });
+      });
+    }
   </script>
 </body>
 </html>
-  `.trim();
+`.trim();
 
-  // Download file
   const blob = new Blob([htmlContent], { type: "text/html" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "landing-page.html";
   link.click();
 });
-
 
 
 

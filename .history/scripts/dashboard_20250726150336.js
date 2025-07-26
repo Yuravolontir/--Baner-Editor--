@@ -530,7 +530,7 @@ function UsersLandingPagesList() {
 downloadbutton.addEventListener("click", () => {
   const clonedPage = page.cloneNode(true);
 
-  // Remove preview lead form if exists
+  // Remove preview lead form if exists (avoid duplicates)
   const previewLeadForm = clonedPage.querySelector("#leadFormContainer");
   if (previewLeadForm) previewLeadForm.remove();
 
@@ -539,12 +539,11 @@ downloadbutton.addEventListener("click", () => {
     const netlifyForm = document.createElement("form");
     netlifyForm.name = "lead-form";
     netlifyForm.method = "POST";
-    netlifyForm.setAttribute("action", "/thank-you");
     netlifyForm.setAttribute("data-netlify", "true");
-    netlifyForm.setAttribute("netlify", "");
+    netlifyForm.setAttribute("netlify", ""); // important for Netlify detection
     netlifyForm.id = "leadFormContainer";
 
-    // Style form container
+    // Style for form container
     Object.assign(netlifyForm.style, {
       display: "flex",
       flexDirection: "column",
@@ -554,14 +553,14 @@ downloadbutton.addEventListener("click", () => {
       width: "100%"
     });
 
-    // Hidden input to identify form
+    // Hidden input to identify form to Netlify
     const hidden = document.createElement("input");
     hidden.type = "hidden";
     hidden.name = "form-name";
     hidden.value = "lead-form";
     netlifyForm.appendChild(hidden);
 
-    // Name field
+    // Name input
     const nameInput = document.createElement("input");
     nameInput.type = "text";
     nameInput.name = "name";
@@ -578,7 +577,7 @@ downloadbutton.addEventListener("click", () => {
     });
     netlifyForm.appendChild(nameInput);
 
-    // Email field
+    // Email input
     const emailInput = document.createElement("input");
     emailInput.type = "email";
     emailInput.name = "email";
@@ -617,7 +616,7 @@ downloadbutton.addEventListener("click", () => {
     clonedPage.appendChild(netlifyForm);
   }
 
-  // Generate full HTML
+  // Compose full HTML content for download
   const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -659,7 +658,7 @@ downloadbutton.addEventListener("click", () => {
   </style>
 </head>
 <body>
-  <!-- Hidden fallback Netlify form -->
+  <!-- Netlify hidden form for backend detection -->
   <form name="lead-form" method="POST" data-netlify="true" netlify hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
@@ -668,6 +667,7 @@ downloadbutton.addEventListener("click", () => {
   ${clonedPage.outerHTML}
 
   <script>
+    // CTA button behavior (same as your code)
     const cta = document.getElementById("cta");
     if (cta) {
       cta.addEventListener("click", () => {
@@ -680,17 +680,16 @@ downloadbutton.addEventListener("click", () => {
     }
   </script>
 </body>
-</html>
+</html>  
   `.trim();
 
-  // Download file
+  // Trigger download of the HTML file
   const blob = new Blob([htmlContent], { type: "text/html" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "landing-page.html";
   link.click();
 });
-
 
 
 

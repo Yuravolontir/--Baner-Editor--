@@ -528,172 +528,196 @@ function UsersLandingPagesList() {
             
             // Add event listener for the download button
 downloadbutton.addEventListener("click", () => {
-  const clonedPage = page.cloneNode(true);
-
-  // Remove preview lead form if exists
-  const previewLeadForm = clonedPage.querySelector("#leadFormContainer");
-  if (previewLeadForm) previewLeadForm.remove();
-
-  // Add Netlify-ready form if leadform is enabled
-  if (b.leadform === "yes") {
-    const netlifyForm = document.createElement("form");
-    netlifyForm.name = "lead-form";
-    netlifyForm.method = "POST";
-    netlifyForm.setAttribute("action", "/thank-you");
-    netlifyForm.setAttribute("data-netlify", "true");
-    netlifyForm.setAttribute("netlify", "");
-    netlifyForm.id = "leadFormContainer";
-
-    // Style form container
-    Object.assign(netlifyForm.style, {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "5vh",
-      width: "100%"
-    });
-
-    // Hidden input to identify form
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "form-name";
-    hidden.value = "lead-form";
-    netlifyForm.appendChild(hidden);
-
-    // Name field
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.name = "name";
-    nameInput.placeholder = "Your Name";
-    nameInput.required = true;
-    Object.assign(nameInput.style, {
-      margin: "10px",
-      borderRadius: "5px",
-      padding: "8px",
-      fontSize: "1rem",
-      width: "90%",
-      maxWidth: "400px",
-      boxSizing: "border-box"
-    });
-    netlifyForm.appendChild(nameInput);
-
-    // Email field
-    const emailInput = document.createElement("input");
-    emailInput.type = "email";
-    emailInput.name = "email";
-    emailInput.placeholder = "Your Email";
-    emailInput.required = true;
-    Object.assign(emailInput.style, {
-      margin: "10px",
-      borderRadius: "5px",
-      padding: "8px",
-      fontSize: "1rem",
-      width: "90%",
-      maxWidth: "400px",
-      boxSizing: "border-box"
-    });
-    netlifyForm.appendChild(emailInput);
-
-    // Submit button
-    const submitBtn = document.createElement("button");
-    submitBtn.type = "submit";
-    submitBtn.textContent = "Submit";
-    Object.assign(submitBtn.style, {
-      backgroundColor: b.ctacolor === "#000000" ? "#3f51b5" : b.ctacolor,
-      color: "white",
-      border: "none",
-      padding: "0.6rem 1rem",
-      fontSize: "1rem",
-      borderRadius: "0.8rem",
-      cursor: "pointer",
-      margin: "2vh auto",
-      width: "90%",
-      maxWidth: "200px",
-      display: "block"
-    });
-    netlifyForm.appendChild(submitBtn);
-
-    clonedPage.appendChild(netlifyForm);
-  }
-
-  // Generate full HTML
-  const htmlContent = `
+    // Create a basic HTML wrapper for the content
+    const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Landing Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body, .landing-page {
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+
+  background-image: ${page.style.backgroundImage ? page.style.backgroundImage : 'none'};
+  background-size: ${page.style.backgroundSize ? page.style.backgroundSize : 'cover'};
+  background-repeat: ${page.style.backgroundRepeat ? page.style.backgroundRepeat : 'no-repeat'};
+  background-position: ${page.style.backgroundPosition ? page.style.backgroundPosition : 'center'};
+  background-color: ${page.style.backgroundColor};
+
+  align-items: ${page.style.alignItems};
+  justify-content: ${page.style.justifyContent};
+}
+
+
+
+  h1 {
+    text-align: center;
+    color: ${b.headingcolor};
+    font-family: ${b.headingfont};
+    font-size: ${b.headingfontsize}px;
+    padding: 0 1rem;
+  }
+
+  pre {
+    text-align: center;
+    color: ${b.textcolor};
+    font-family: ${b.textfont};
+    font-size: ${b.textfontsize}px;
+    padding: 0 1rem;
+    white-space: pre-wrap;
+  }
+
+  #ImageToAdd {
+    width: 100%;
+    max-width: ${b.imgwidth}px;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: ${b.imgborder}px;
+    object-fit: cover;
+    margin: 3vh auto;
+    display: block;
+  }
+
+#cta {
+  background-color: ${b.ctacolor === "#000000" ? "#3f51b5" : b.ctacolor};
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px;
+  max-width: 300px; /* ✅ Limit button width */
+  width: 100%;       /* Let it fill only within max-width */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+  #leadFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5vh;
+    width: 100%;
+  }
+
+  #leadFormContainer input {
+    margin: 10px;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 1rem;
+    width: 90%;
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 90%;
+    max-width: 200px;
+    margin: 2vh auto;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: calc(${b.headingfontsize}px * 0.8);
     }
-    html, body {
-      width: 100vw; height: 100vh; overflow-x: hidden; font-family: 'Inter', sans-serif;
+    pre {
+      font-size: calc(${b.textfontsize}px * 0.8);
     }
-    body, .landing-page {
-      width: 100vw !important; max-width: 100vw !important;
-      margin: 0 !important; padding: 0 !important; box-sizing: border-box;
+    #cta, button {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
     }
-    .landing-page {
-      display: flex; flex-direction: column; min-height: 100vh;
-      background-image: ${page.style.backgroundImage || 'none'};
-      background-size: ${page.style.backgroundSize || 'cover'};
-      background-repeat: ${page.style.backgroundRepeat || 'no-repeat'};
-      background-position: ${page.style.backgroundPosition || 'center'};
-      background-color: ${page.style.backgroundColor || '#fff'};
-      align-items: ${page.style.alignItems || 'center'};
-      justify-content: ${page.style.justifyContent || 'center'};
-      padding: 20px;
-    }
-    form#leadFormContainer {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 5vh;
-    }
-  </style>
+  }
+    @media (max-width: 600px) {
+  #cta {
+    max-width: 90%;
+  }
+}
+
+</style>
+
 </head>
 <body>
-  <!-- Hidden fallback Netlify form -->
-  <form name="lead-form" method="POST" data-netlify="true" netlify hidden>
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-  </form>
+    ${page.outerHTML}
+    <script>
+                    const cta = document.getElementById("cta");
+                    const clas = cta.className;
 
-  ${clonedPage.outerHTML}
+    cta.addEventListener("click", () => {
+                        if (cta.className === "default") //link to URL
+                        {
+                            window.location.href = cta.getAttribute("data-link");
+                        }
 
-  <script>
-    const cta = document.getElementById("cta");
-    if (cta) {
-      cta.addEventListener("click", () => {
-        const type = cta.className;
-        const link = cta.getAttribute("data-link");
-        if (type === "default") window.location.href = link;
-        else if (type === "Behavior1") window.location.href = "tel:" + link;
-        else if (type === "Behavior2") window.location.href = "https://wa.me/" + link;
-      });
-    }
-  </script>
+                    if (cta.className === "Behavior1") // phone call
+                        {
+                            window.location.href = "tel:" + cta.getAttribute("data-link");
+
+                        }
+                        
+                    if (cta.className === "Behavior2") // Open WhatsApp
+                        {
+                            window.location.href = "https://wa.me/" + cta.getAttribute("data-link");
+
+                        }
+
+                    });
+    </script>
 </body>
 </html>
-  `.trim();
+    `.trim();
 
-  // Download file
-  const blob = new Blob([htmlContent], { type: "text/html" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "landing-page.html";
-  link.click();
+    const blob = new Blob([htmlContent], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "landing-page.html";
+    link.click();
 });
-
-
-
-
             // ----------------------------
             deletebutton.addEventListener("click", () => {
                 storedUsersLandingPages.splice(index, 1);
