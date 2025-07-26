@@ -89,8 +89,9 @@ h2 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   padding: 1.2rem;
   margin-bottom: 1.5rem;
+  min-width: 220px;
   width: 100%;
-  max-width: 600px; /* Adjust as needed */
+  max-width: 600px; /* or whatever you consider ideal max width */
   min-width: 250px;
   display: flex;
   flex-direction: column;
@@ -98,7 +99,6 @@ h2 {
   box-sizing: border-box;
   word-break: break-word;
 }
-
 
 .banner h1, .Emailbanner h1, .landing-page h1 {
   margin: 0 0 0.8rem 0;
