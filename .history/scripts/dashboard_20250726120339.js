@@ -119,10 +119,10 @@ function UsersEmailBannersList() {
             {
             const banner = document.createElement("div");
             banner.className = "Emailbanner";
-            banner.style.width = "100%";         // Full width of the parent
-            banner.style.maxWidth = "600px";     // Optional max limit for large screens
-            banner.style.minWidth = "250px";     // Minimum for readability
-            banner.style.minHeight = b.minHeight || "120px";
+            banner.style.width = b.width || "100%";         // Use saved width or default to 100%
+            banner.style.maxWidth = "100%";                 // Prevent overflowing parent
+            banner.style.minWidth = "250px";                // Optional: Keep readability
+            banner.style.minHeight = b.minHeight || "120px"; // Fallback for height
 
             if (b.designstyle!== "default") {
                 switch (b.designstyle) {
