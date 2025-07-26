@@ -453,9 +453,6 @@ function UsersLandingPagesList() {
             button.textContent = "Submit";
             button.id = "submitLeadForm";
             button.style.padding = "12px 24px";
-            button.style.border = "none";
-            button.style.borderRadius = "6px";
-            button.style.cursor = "pointer";
             if (b.ctacolor != "#000000" )
             {
                 button.style.backgroundColor =b.ctacolor;
@@ -537,148 +534,91 @@ downloadbutton.addEventListener("click", () => {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    <style>
+        html, body {
+            min-height: 100vh;
+            height: 100%;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .landing-page {
+          min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+            width: ${page.style.width};
+            min-width: ${page.style.minWidth};
 
-body, .landing-page {
-  width: 100%;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box;
-}
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100vw;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box;
+            display: ${page.style.display};
+            flex-direction: ${page.style.flexDirection};
+            align-items: ${page.style.alignItems};
+            justify-content: ${page.style.justifyContent};
+            padding: ${page.style.padding};
+            background-image: ${page.style.backgroundImage ? page.style.backgroundImage : 'none'};
+            background-size: ${page.style.backgroundSize ? page.style.backgroundSize : 'cover'};
+            background-repeat: ${page.style.backgroundRepeat ? page.style.backgroundRepeat : 'no-repeat'};
+            background-position: ${page.style.backgroundPosition ? page.style.backgroundPosition : 'center'};
+            background-color: ${page.style.backgroundColor};
+        }
 
-  background-image: ${page.style.backgroundImage ? page.style.backgroundImage : 'none'};
-  background-size: ${page.style.backgroundSize ? page.style.backgroundSize : 'cover'};
-  background-repeat: ${page.style.backgroundRepeat ? page.style.backgroundRepeat : 'no-repeat'};
-  background-position: ${page.style.backgroundPosition ? page.style.backgroundPosition : 'center'};
-  background-color: ${page.style.backgroundColor};
-
-  align-items: ${page.style.alignItems};
-  justify-content: ${page.style.justifyContent};
-}
-
-
-
-  h1 {
-    text-align: center;
-    color: ${b.headingcolor};
-    font-family: ${b.headingfont};
-    font-size: ${b.headingfontsize}px;
-    padding: 0 1rem;
-  }
-
-  pre {
-    text-align: center;
-    color: ${b.textcolor};
-    font-family: ${b.textfont};
-    font-size: ${b.textfontsize}px;
-    padding: 0 1rem;
-    white-space: pre-wrap;
-  }
-
-  #ImageToAdd {
-    width: 100%;
-    max-width: ${b.imgwidth}px;
-    height: auto;
-    aspect-ratio: 1/1;
-    border-radius: ${b.imgborder}px;
-    object-fit: cover;
-    margin: 3vh auto;
-    display: block;
-  }
-
-#cta {
-  background-color: ${b.ctacolor === "#000000" ? "#3f51b5" : b.ctacolor};
-  padding: 12px 24px;
+        h1 {
+            text-align: center;
+            color: ${b.headingcolor};
+            font-family: ${b.headingfont};
+            font-size: ${b.headingfontsize}px;
+        }
+        pre {
+            text-align: center;
+            color: ${b.textcolor};
+            font-family: ${b.textfont};
+            font-size: ${b.textfontsize}px;
+        }
+        #ImageToAdd {
+            width: ${b.imgwidth}px;
+            height: ${b.imgheight}px;
+            aspect-ratio: 1/1;
+            border-radius: ${b.imgborder}px;
+            object-fit: cover;
+            margin: 3vh;
+        }
+        #cta {
+            background-color: ${b.ctacolor === "#000000" ? "#3f51b5" : b.ctacolor};
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        #leadFormContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5vh;
+        }
+        #leadFormContainer input {
+            margin: 10px;
+            border-radius: 5px;
+            padding: 3px;
+        }
+            button {
+  background-color: #3f51b5;
+  color: white;
   border: none;
-  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.8rem;
   cursor: pointer;
-  margin-top: 16px;
-  max-width: 300px; /* ✅ Limit button width */
-  width: 100%;       /* Let it fill only within max-width */
+  transition: background-color 0.2s ease;
+  width: 10rem;
+  margin : 2vh;
   margin-left: auto;
   margin-right: auto;
-  display: block;
+  
+
 }
 
-
-  #leadFormContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5vh;
-    width: 100%;
-  }
-
-  #leadFormContainer input {
-    margin: 10px;
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 1rem;
-    width: 90%;
-    max-width: 400px;
-    box-sizing: border-box;
-  }
-
-  button {
-    background-color: #3f51b5;
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    width: 90%;
-    max-width: 200px;
-    margin: 2vh auto;
-    display: block;
-  }
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: calc(${b.headingfontsize}px * 0.8);
-    }
-    pre {
-      font-size: calc(${b.textfontsize}px * 0.8);
-    }
-    #cta, button {
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
-    }
-  }
-    @media (max-width: 600px) {
-  #cta {
-    max-width: 90%;
-  }
-}
-
-</style>
-
+    </style>
 </head>
 <body>
     ${page.outerHTML}

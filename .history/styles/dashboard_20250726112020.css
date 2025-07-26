@@ -4,16 +4,24 @@ body {
 }
 
 nav {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   width: 100vw;
-  margin-left: calc(-50vw + 50%); /* force full width nav centered */
-  max-width: none;                /* let it go full width */
-  margin-bottom: 2rem;
+  max-width: none;
+
   background: var(--control-bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   border-radius: var(--border-radius);
   padding: 0.8rem 0;
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
+}
+nav ul {
+  padding: 0 1rem;
 }
 
 

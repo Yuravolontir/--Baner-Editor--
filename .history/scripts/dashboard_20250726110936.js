@@ -453,9 +453,6 @@ function UsersLandingPagesList() {
             button.textContent = "Submit";
             button.id = "submitLeadForm";
             button.style.padding = "12px 24px";
-            button.style.border = "none";
-            button.style.borderRadius = "6px";
-            button.style.cursor = "pointer";
             if (b.ctacolor != "#000000" )
             {
                 button.style.backgroundColor =b.ctacolor;
@@ -671,12 +668,6 @@ body, .landing-page {
       padding: 0.5rem 1rem;
     }
   }
-    @media (max-width: 600px) {
-  #cta {
-    max-width: 90%;
-  }
-}
-
 </style>
 
 </head>

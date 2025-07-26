@@ -453,9 +453,6 @@ function UsersLandingPagesList() {
             button.textContent = "Submit";
             button.id = "submitLeadForm";
             button.style.padding = "12px 24px";
-            button.style.border = "none";
-            button.style.borderRadius = "6px";
-            button.style.cursor = "pointer";
             if (b.ctacolor != "#000000" )
             {
                 button.style.backgroundColor =b.ctacolor;
