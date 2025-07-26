@@ -162,7 +162,7 @@ nav ul li a:hover {
 }
 
 
-#saveLanding, #DownloadHTML {
+#downloadBanner, #saveBanner {
   background-color: var(--color-accent);
   color: white;
   border: none;
@@ -179,7 +179,7 @@ nav ul li a:hover {
   display: inline-block;
 }
 
-#saveLanding:hover, #DownloadHTML:hover {
+#downloadBanner:hover, #saveBanner:hover {
   background-color: #2c3e91;
   box-shadow: 0 4px 16px rgba(63,81,181,0.12);
 }
@@ -218,7 +218,7 @@ nav ul li a:hover {
     min-height: 20vh;
     padding: 0.5rem;
   }
-  #saveLanding, #DownloadHTML {
+  #downloadBanner, #saveBanner {
     font-size: 0.95rem;
     padding: 0.6rem 0.7rem;
     min-width: 90px;
