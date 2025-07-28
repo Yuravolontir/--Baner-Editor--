@@ -1,159 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   <link rel="stylesheet" href="/styles/landing.css">
-    <script type="module" src="/scripts/landing.js"></script>
-    <!--Google Fonts-->
- <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-
+    <title>My Landing Page</title>
 </head>
 <body>
-    <nav>
-    <ul>
-    <li><a href="/dashboard.html">Home</a></li>
-    <li><a href="/banner.html">Banner Editor</a></li>
-    <li><a href="/email.html">Marketing Page Editor (for Email)</a></li>
-    <li><a href="/landing.html">Landing Page Editor</a></li>
-    </ul>
-</nav>
 
+    <h1>My Awesome Landing Page</h1>
+    <p>Download this page and see the form work!</p>
 
-<div id="banner-builder-container">
-<div id="controls-section">
+    <!-- This is the form we will modify -->
+    <form id="contact-form">
+        <!-- A hidden field for spam protection (optional but good practice) -->
+        <p style="display:none;">
+            <label>Don’t fill this out if you’re human: <input name="bot-field"></label>
+        </p>
 
-<label>Select Template:</label>
-<select id="templates">
-  <option value="default">Empty</option>
-  <option value="template1">1</option>
-  <option value="template2">2</option>
-  <option value="template3">3</option>
-</select>
+        <p>
+            <label>Your Name: <input type="text" name="name" required></label>
+        </p>
+        <p>
+            <label>Your Email: <input type="email" name="email" required></label>
+        </p>
+        <p>
+            <label>Message: <textarea name="message" required></textarea></label>
+        </p>
+        <p>
+            <button type="submit">Send</button>
+        </p>
+    </form>
 
-<h3>Text</h3>
-<label for="Heading">Heading:</label>
-<textarea id="Heading" placeholder="Enter your heading text here..."></textarea>
-<button id="emojiHeading">😀</button>
+    <!-- To display success or error messages -->
+    <div id="form-status"></div>
 
-<label for="Text">Main Text:</label>
-<textarea id="Text" placeholder="Enter your main text here..."></textarea>
-<button id="emojiText">😀</button>
+    <script>
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
 
-<h3>Background Color</h3>
-<input type="color" id="BackgroundColor" value="#ffffff">
+        contactForm.addEventListener('submit', event => {
+            event.preventDefault(); // Prevent the default form submission
 
-<h3>Heading Color</h3>
-<input type="color" id="HeadingColor">
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
 
-<h3>Text Color</h3>
-<input type="color" id="TextColor">
+            // Simple bot check
+            if (data['bot-field']) {
+                return;
+            }
+            delete data['bot-field']; // Remove it from the data we send
 
-<h3>CTA Button Text</h3>
-<input type="text" id="CTAButtonText" placeholder="Enter CTA button text">
+            formStatus.innerHTML = 'Sending...';
 
-<h3>CTA Button Behavior</h3>
-<select id="CTAButtonBehavior">
-  <option value="default">📎 Link to URL</option>
-  <option value="Behavior1">📞 Phone</option>
-  <option value="Behavior2">💬 Whatsapp</option>
-</select>
-<h3>CTA Button Color</h3>
-<input type="color" id="CTAColor">
-<div id="CTAInputContainer" ></div>
-<h3>Choose heading font</h3>
-<select id="head-font">
-  <option value="Courier New">Courier New</option>
-  <option value="Inter">Inter</option>
-  <option value="Poppins">Poppins</option>
-  <option value="Space Grotesk">Space Grotesk</option>
-  <option value="Outfit">Outfit</option>
-  <option value="Manrope">Manrope</option>
-  <option value="Sora">Sora</option>
-  <option value="Figtree">Figtree</option>
-  <option value="Rubik">Rubik</option>
-  <option value="Urbanist">Urbanist</option>
-  <option value="DM Sans">DM Sans</option>
-  <option value="Silkscreen, sans-serif">Silkscreen Static</option>
-  <option value="Orbitron, sans-serif">Orbitron</option>
-  <option value="Lobster Two, sans-serif">Lobster Two</option>
-  <option value="Bangers, system-ui">Bangers</option>
-</select>
+            // The endpoint for our Netlify Function
+            const endpoint = '/.netlify/functions/submit-form';
 
-<h3>Choose text font</h3>
-<select id="text-font">
-  <option value="Courier New">Courier New</option>
-  <option value="Inter">Inter</option>
-  <option value="Poppins">Poppins</option>
-  <option value="Space Grotesk">Space Grotesk</option>
-  <option value="Outfit">Outfit</option>
-  <option value="Manrope">Manrope</option>
-  <option value="Sora">Sora</option>
-  <option value="Figtree">Figtree</option>
-  <option value="Rubik">Rubik</option>
-  <option value="Urbanist">Urbanist</option>
-  <option value="DM Sans">DM Sans</option>
-  <option value="Silkscreen, sans-serif">Silkscreen Static</option>
-  <option value="Orbitron, sans-serif">Orbitron</option>
-  <option value="Lobster Two, sans-serif">Lobster Two</option>
-  <option value="Bangers, system-ui">Bangers</option>
-</select>
-
-<h3>Banner Heading Font-size</h3>
-<input type="number" id="headingFontSize" placeholder="Enter font size in px" value="24">
-
-<h3>Banner Text Font-size</h3>
-<input type="number" id="textFontSize" placeholder="Enter font size in px" value="16">
-
-<label>Add img (enter URL)</label>
-<input type="text" id="addimageInput" placeholder="Enter image URL" />
-  <label>Set img width:</label>
-<input type="number" id="imgwidth" placeholder="enter width in px" value="200">
-  <label>Set img height:</label>
-<input type="number" id="imgheight" placeholder="enter height in px" value="200">
-  <label>Set img border radius:</label>
-<input type="number" id="imgborderradius" placeholder="enter border radius in px" value="5">
-
-
-<label>Set img background URL:</label>
-<input type="text" id="imageInput" placeholder="Enter image URL" />
-
-<h3>Try our gradient</h3>
-<select id="designStyle">
-  <option value="default">Empty</option>
-  <option value="gradient1">Peach</option>
-  <option value="gradient2">Purple</option>
-  <option value="gradient3">Dark</option>
-</select>
-  <h3>Lead Form</h3>
-  <label>Show Lead Form?</label>
-  <select id="leadFormToggle">
-  <option value="no">No</option>
-  <option value="yes">Yes</option>
-  </select>
-
-</div>
-
-<div id="preview">
-    
-</div>
-
-<!--<button id="DownloadHTML">Download HTML file</button>-->
-<button id="saveLanding">Save</button>
-
-</div>
-
-
-
-
-
-
-
-
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                contactForm.reset(); // Clear the form
+                formStatus.innerHTML = `<p style="color: green;">${result.message}</p>`;
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                formStatus.innerHTML = `<p style="color: red;">There was an error. Please try again.</p>`;
+                console.error('Error:', error);
+            });
+        });
+    </script>
 
 </body>
 </html>
