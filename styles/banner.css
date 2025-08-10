@@ -156,7 +156,7 @@ nav ul li a:hover {
   height: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 1.5rem;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
