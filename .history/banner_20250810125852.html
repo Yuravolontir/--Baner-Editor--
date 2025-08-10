@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Marketing Campaigns</title>
-   <link rel="stylesheet" href="/styles/landing.css">
-    <script type="module" src="/scripts/landing.js"></script>
-    <!--Google Fonts-->
- <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/banner.css">
+    <script type="module" src="/scripts/banner.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=DM+Sans&family=Figtree&family=Inter&family=Manrope&family=Outfit&family=Rubik&family=Space+Grotesk&family=Sora&family=Urbanist&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicon/site.webmanifest">
+
+
+<!-- Include html2canvas library for capturing the banner as an image-->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+
+
+    
 </head>
 <body>
-    <nav>
+   
+<nav>
     <ul>
     <li><a href="/dashboard.html">Home</a></li>
     <li><a href="/banner.html">Banner Editor</a></li>
@@ -25,30 +29,23 @@
     <li><a href="/landing.html">Landing Page Editor</a></li>
     </ul>
 </nav>
-
-
 <div id="banner-builder-container">
 <div id="controls-section">
-
-<label>Select Template:</label>
-<select id="templates">
-  <option value="default">Empty</option>
-  <option value="template1">1</option>
-  <option value="template2">2</option>
-  <option value="template3">3</option>
-</select>
-
+<h3>Banner size</h3>
+<button id="250X250">250x250</button>
+<button id="300X600">300x600</button>
 <h3>Text</h3>
-<label for="Heading">Heading:</label>
-<textarea id="Heading" placeholder="Enter your heading text here..."></textarea>
+
+<label for="bannerHeading">Heading:</label>
+<textarea id="bannerHeading" placeholder="Enter your heading text here..."></textarea>
 <button id="emojiHeading">😀</button>
 
-<label for="Text">Main Text:</label>
-<textarea id="Text" placeholder="Enter your main text here..."></textarea>
+<label for="bannerText">Main Text:</label>
+<textarea id="bannerText" placeholder="Enter your main text here..."></textarea>
 <button id="emojiText">😀</button>
 
 <h3>Background Color</h3>
-<input type="color" id="BackgroundColor" value="#ffffff">
+<input type="color" id="BackgroundColor">
 
 <h3>Heading Color</h3>
 <input type="color" id="HeadingColor">
@@ -56,18 +53,6 @@
 <h3>Text Color</h3>
 <input type="color" id="TextColor">
 
-<h3>CTA Button Text</h3>
-<input type="text" id="CTAButtonText" placeholder="Enter CTA button text">
-
-<h3>CTA Button Behavior</h3>
-<select id="CTAButtonBehavior">
-  <option value="default">📎 Link to URL</option>
-  <option value="Behavior1">📞 Phone</option>
-  <option value="Behavior2">💬 Whatsapp</option>
-</select>
-<h3>CTA Button Color</h3>
-<input type="color" id="CTAColor">
-<div id="CTAInputContainer" ></div>
 <h3>Choose heading font</h3>
 <select id="head-font">
   <option value="Courier New">Courier New</option>
@@ -108,55 +93,26 @@
 
 <h3>Banner Heading Font-size</h3>
 <input type="number" id="headingFontSize" placeholder="Enter font size in px" value="24">
-
 <h3>Banner Text Font-size</h3>
 <input type="number" id="textFontSize" placeholder="Enter font size in px" value="16">
-
-<label>Add img (enter URL)</label>
-<input type="text" id="addimageInput" placeholder="Enter image URL" />
-  <label>Set img width:</label>
-<input type="number" id="imgwidth" placeholder="enter width in px" value="200">
-  <label>Set img height:</label>
-<input type="number" id="imgheight" placeholder="enter height in px" value="200">
-  <label>Set img border radius:</label>
-<input type="number" id="imgborderradius" placeholder="enter border radius in px" value="5">
-
-
-<label>Set img background URL:</label>
-<input type="text" id="imageInput" placeholder="Enter image URL" />
 
 <h3>Try our gradient</h3>
 <select id="designStyle">
   <option value="default">Empty</option>
-  <option value="gradient1">Peach</option>
-  <option value="gradient2">Purple</option>
-  <option value="gradient3">Dark</option>
+  <option value="gradient1">Minimal Clean</option>
+  <option value="gradient2">Bold & Colorful</option>
+  <option value="gradient3">Retro Pixel</option>
 </select>
-  <h3>Lead Form</h3>
-  <label>Show Lead Form?</label>
-  <select id="leadFormToggle">
-  <option value="no">No</option>
-  <option value="yes">Yes</option>
-  </select>
+
 
 </div>
-
 <div id="preview">
     
 </div>
-
-<!--<button id="DownloadHTML">Download HTML file</button>-->
-<button id="saveLanding">Save</button>
+<button id="downloadBanner">Download Banner</button>
+<button id="saveBanner">Save Banner</button>
 
 </div>
-
-
-
-
-
-
-
-
 
 </body>
 </html>
