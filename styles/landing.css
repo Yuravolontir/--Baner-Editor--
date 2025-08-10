@@ -87,6 +87,8 @@ nav ul li a:hover {
   gap: 1.2rem;
   min-width: 260px;
   max-width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 #controls-section h3 {
@@ -186,37 +188,31 @@ nav ul li a:hover {
 
 @media (max-width: 900px) {
   #banner-builder-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 1.2rem;
-    padding: 1rem 2vw;
-    min-height: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
   }
   #controls-section {
-    max-width: 98vw;
-    min-width: 0;
-    padding: 1.2rem 2vw;
-  }
-  #preview {
-    min-height: 30vh;
-    padding: 1rem;
+    max-height: 70vh;
   }
 }
 
 @media (max-width: 600px) {
-  nav ul {
-    gap: 0.5rem;
-  }
   #banner-builder-container {
-    padding: 0.5rem 1vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50vh 50vh;
+    height: 100vh;
+    padding: 0.5rem;
   }
   #controls-section {
-    padding: 0.7rem 1vw;
-    font-size: 0.95rem;
+    max-height: 100%;
+    padding: 1rem;
   }
   #preview {
-    min-height: 20vh;
-    padding: 0.5rem;
+    height: 100%;
+  }
+  nav ul {
+    gap: 0.5rem;
   }
   #saveLanding, #DownloadHTML {
     font-size: 0.95rem;
